@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/OlegMell/-tic-tac-toe#readme",
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "hbs": "^4.1.0",
+    "jquery": "^3.4.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
