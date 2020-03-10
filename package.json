@@ -1,0 +1,33 @@
+{
+  "name": "lesson-8-socketio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlegMell/-tic-tac-toe.git"
+  },
+  "keywords": [
+    "game",
+    "tic-tac-toe-",
+    "js",
+    "nodejs"
+  ],
+  "author": "Oleg Melnik <oleg.mel123@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlegMell/-tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/OlegMell/-tic-tac-toe#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
