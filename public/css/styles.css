@@ -34,10 +34,15 @@ body{height: 100vh}
     border-bottom: 1px solid rgba(0,0,0,.5);
 }
 
+.user-exit{
+    width: 150px;
+    justify-content: space-between;
+    display: flex;
+}
+
 .username{
     font-size: 20px;
 }
-
 
 .field{
     margin: auto;

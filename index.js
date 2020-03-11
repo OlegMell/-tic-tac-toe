@@ -20,6 +20,11 @@ app.use(session({
 
 app.use('/', router);
 
+io.on('connection', socket => {
+    socket.emit('message', 'hello!');
+});
+
+
 http.listen(port, host, () => console.log(`server listen on http://localhost:${port}`));
 
 

@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const signIn = require('./sign-in');
+const exit = require('./exit');
 const game = require('./game');
 
 router.get('/', (req, res) => {
-    const user = req.session.user;
+    console.log('index');
+    const user = req.session.username;
+    console.log(user);
     if(!user){
         return res.redirect('/sign-in');
     }
@@ -12,6 +15,7 @@ router.get('/', (req, res) => {
 
 router.use('/', signIn);
 router.use('/', game);
+router.use('/', exit);
 
 
 module.exports = router;
