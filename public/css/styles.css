@@ -1,0 +1,54 @@
+body{height: 100vh}
+
+.center-container{
+    display: flex;
+    height: 100vh;
+}
+
+.sign-in-form{
+    border: 1px solid rgba(0,0,0, .4);
+    border-radius: 8px;
+    padding: 20px;
+    margin: auto;
+    height: 170px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+    -webkit-box-shadow: 0px 6px 16px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 16px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 6px 16px -8px rgba(0,0,0,0.75);
+}
+
+.sign-in-form .form-control{
+    margin: 10px 0;
+}
+
+.head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(0,0,0,.5);
+}
+
+.username{
+    font-size: 20px;
+}
+
+
+.field{
+    margin: auto;
+    display: flex;
+    width: 300px;
+    flex-wrap: wrap;
+}
+
+.field-item{
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0,0,0, .4);
+}
