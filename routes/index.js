@@ -4,9 +4,7 @@ const exit = require('./exit');
 const game = require('./game');
 
 router.get('/', (req, res) => {
-    console.log('index');
     const user = req.session.username;
-    console.log(user);
     if(!user){
         return res.redirect('/sign-in');
     }
