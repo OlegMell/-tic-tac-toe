@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
     if(!user){
         return res.redirect('/sign-in');
     }
+
     res.redirect('/game');
 });
 
