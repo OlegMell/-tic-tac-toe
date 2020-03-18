@@ -4,7 +4,7 @@ const alertType = {
     'wait': `<div id="alert" class="alert alert-warning" role="alert">
                     Wait for second player..
                 </div>`,
-    'started': `<div id="alert" class="alert alert-warning" role="alert">
+    'started': `<div id="alert" class="alert alert-success" role="alert">
                     The game is started
                 </div>`,
     'not set': `<div id="alert" class="alert alert-primary" role="alert">
@@ -13,7 +13,5 @@ const alertType = {
 };
 
 hbs.registerHelper('alert', function (state) {
-    if(!state){
-        return alertType[state];
-    }
+    return alertType[state];
 });
