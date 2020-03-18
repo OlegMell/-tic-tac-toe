@@ -16,30 +16,24 @@
     <div class="row">
         <div class="col-3">
             <ul class="list-group rooms">
-                {{#each rooms}}
-                    <li class="list-group-item">{{this.name}}</li>
-                {{/each}}
-<!--                <li class="list-group-item ">Dapibus ac facilisis in</li>-->
-<!--                <li class="list-group-item">Morbi leo risus</li>-->
-<!--                <li class="list-group-item">Porta ac consectetur ac</li>-->
-<!--                <li class="list-group-item">Vestibulum at eros</li>-->
+                {{#roomList rooms}}{{/roomList}}
             </ul>
         </div>
         <div class="col-8">
-            <div class="alert alert-primary" role="alert">
+            <div id="alert" class="alert alert-primary" role="alert">
                 choose a free room or create your own for start a game
             </div>
-            <!--            <div class="field">-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--                <div class="field-item"></div>-->
-            <!--            </div>-->
+            <div id="field" class="field disable">
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+                <div class="field-item"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -57,3 +57,23 @@ body{height: 100vh}
     height: 100px;
     border: 1px solid rgba(0,0,0, .4);
 }
+
+
+.active{
+    display: block;
+}
+
+.disable{
+    display: none;
+}
+
+
+.col-3{
+    height: 80vh;
+}
+
+.list-group{
+    height: 100%;
+    padding-right: 5px;
+    border-right: 1px solid rgba(0, 0, 0, .4);
+}

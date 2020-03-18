@@ -4,7 +4,7 @@ const router = require('./routes/index');
 const session = require('express-session');
 const { port, host, sessionSecret } = require('./config');
 const { app, http } = require('./server-obj');
-
+const roomList = require('./views/helpers/room-list');
 
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname));
@@ -17,6 +17,7 @@ app.use(session({
 }));
 
 app.use('/', router);
+
 
 
 http.listen(port, host, () => console.log(`server listen on http://localhost:${port}`));
