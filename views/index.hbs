@@ -20,19 +20,10 @@
             </ul>
         </div>
         <div class="col-8">
-            <div id="alert" class="alert alert-primary" role="alert">
-                choose a free room or create your own for start a game
-            </div>
-            <div id="field" class="field disable">
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
-                <div class="field-item"></div>
+            {{#alert started}}
+            {{/alert}}
+            <div id="field" class="field">
+                {{#fieldItem field}}{{/fieldItem}}
             </div>
         </div>
     </div>

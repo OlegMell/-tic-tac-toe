@@ -5,6 +5,8 @@ const session = require('express-session');
 const { port, host, sessionSecret } = require('./config');
 const { app, http } = require('./server-obj');
 const roomList = require('./views/helpers/room-list');
+const fieldItem = require('./views/helpers/field-item');
+const alert = require('./views/helpers/alert');
 
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname));
