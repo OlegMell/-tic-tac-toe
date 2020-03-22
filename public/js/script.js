@@ -49,7 +49,7 @@ $(document).ready(() => {
         });
 
 
-        $('.room').click(({target}) => {
+        $('.rooms').on('click', '.room', ({target}) => {
             const room = $(target).text();
             joinRoom(room);
             setTimeout(() => {
