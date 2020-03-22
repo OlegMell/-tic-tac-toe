@@ -31,8 +31,7 @@ class GameService {
                     players.push({username, id: socket.id});
                     this.rooms.push({
                         name: room,
-                        players,
-                        field: new Array(9).fill('')
+                        players
                     });
                     socket.join(room);
                 }
@@ -42,7 +41,7 @@ class GameService {
             socket.on('start', room => {
                 let whoNext;
                 this.rooms = this.rooms.map(r => {
-                    if (r.name === room){
+                    if (r.name === room) {
                         r.whoNext = r.players[this.getRandomInt(2)];
                         whoNext = r.whoNext;
                     }
@@ -55,7 +54,7 @@ class GameService {
                 this.xNextMove = !this.xNextMove;
                 let whoNext;
                 this.rooms = this.rooms.map(r => {
-                    if (r.name === currentRoom){
+                    if (r.name === currentRoom) {
                         r.whoNext = r.players.find(p => p.id !== socket.id);
                         whoNext = r.whoNext;
                     }
@@ -74,14 +73,25 @@ class GameService {
             });
 
             socket.on('leave room', room => {
-               socket.leave(room);
-               const player = this.rooms.find(r => r.name === room).players.find(p => p.id === socket.id);
-               io.to(room).emit('cli leave', player);
+                socket.leave(room);
+                if (this.rooms) {
+                    const player  = this.rooms.find(r => r.name === room).players.find(p => p.id === socket.id);
+                    this.rooms = this.rooms.map(r => {
+                        if (r.name === room){
+                            r.players = r.players.filter(p => p.id !== socket.id);
+                            r.whoNext = null;
+                        }
+                        return r;
+                    });
+                    console.log(this.rooms);
+                    io.to(room).emit('cli leave', player);
+                }
+                console.log(this.rooms);
             });
         });
     }
 
-    getRandomInt(max){
+    getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max))
     }
 

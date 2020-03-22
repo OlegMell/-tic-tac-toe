@@ -22,14 +22,16 @@
         </div>
         <div class="col-8">
             <div class="info">
-                <div>
-                    <p id="currentRoom">You joined in <span></span></p>
+                <div class="flex">
+                    <div>
+                        <p id="opponent">You play with: <span></span></p>
+                    </div>
+                    <div>
+                        <p id="currentRoom">Current room: <span></span></p>
+                        <button id="leaveRoom" class="btn btn-primary">Leave room
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <p id="opponent">Your opponent is <span></span></p>
-                </div>
-                <button id="leaveRoom" class="btn btn-primary">Leave room
-                </button>
                 <div id="alert" class="alert alert-primary" role="alert">
                     choose a free room or create your own for start a game
                 </div>

@@ -3,7 +3,6 @@ const game = express.Router();
 const { ticTacToe } = require('../services/tic-tac-toe');
 const joinRoom = require('./join-room');
 
-console.log(ticTacToe);
 ticTacToe.startConnection();
 
 game.get('/game', (req, res) => {

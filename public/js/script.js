@@ -1,4 +1,9 @@
 $(document).ready(() => {
+
+    document.body.onload = () => {
+        document.onkeydown = onkeydown;
+    };
+
     if (location.href.includes('/game')) {
         let socket = io();
         let currentRoom;
@@ -7,6 +12,20 @@ $(document).ready(() => {
         const username = $('#username').text();
         let currentGameState = new Array(9).fill('');
 
+        function onkeydown(e) {
+            if (e.keyCode === 82 && e.ctrlKey) {
+                if (confirm('if you reload the page you will lose all' +
+                    ' progress\nContinue?')){
+                    if (currentRoom){
+                        console.log(currentRoom);
+                        socket.emit('leave room', currentRoom);
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
         $('#saveRoomBtn').click(e => {
             e.preventDefault();
@@ -71,7 +90,6 @@ $(document).ready(() => {
 
         socket.on('start', ({xNext, whoNext}) => {
             selfNext = whoNext.id === socket.id;
-
             xNextMove = xNext;
         });
 
@@ -83,14 +101,17 @@ $(document).ready(() => {
                 currentGameState[index] = xNextMove ? 'X' : 'O';
                 socket.emit('move', {currentRoom, gameState: currentGameState});
                 xNextMove = !xNextMove;
+                selfNext = !selfNext;
             }
         });
 
         $('#leaveRoom').click(() => {
            socket.emit('leave room', currentRoom);
+           currentRoom = '';
         });
 
         socket.on('move', ({ xNext, newGameState, whoNext }) => {
+            console.log(whoNext);
             selfNext = whoNext.id === socket.id;
             xNextMove = xNext;
             const items = $('.field-item');
@@ -108,6 +129,7 @@ $(document).ready(() => {
                 });
             } else {
                 socket.emit('leave room', currentRoom);
+                currentRoom = '';
                 $('#field').fadeOut(200);
                 $('#alert')
                     .fadeIn(300)
@@ -135,7 +157,6 @@ $(document).ready(() => {
             $('#alert').fadeOut(200);
             $('#field').toggleClass('disable');
         };
-
         const showOpponent = (opponent) => {
             $('#opponent')
                 .css('display', 'inline')
