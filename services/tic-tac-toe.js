@@ -1,34 +1,109 @@
-const { http } = require('../server-obj');
+const {http} = require('../server-obj');
 const io = require('socket.io')(http);
 
 
-class GameService{
+class GameService {
     constructor() {
         this.rooms = [];
         this.startConnection = this.startConnection.bind(this);
+        this.xNextMove = true;
     }
-    startConnection(){
+
+    startConnection() {
         io.on('connection', socket => {
             socket.on('join room', data => {
-                const { room } = data;
+                const {room, username} = data;
                 let findRoom = this.rooms.find(r => r.name === room);
-                if (findRoom && findRoom.players < 2) {
+                if (findRoom && findRoom.players.length < 2) {
+                    let opponent;
                     this.rooms = this.rooms.map(r => {
                         if (r.name === findRoom.name) {
-                            r.players += 1;
+                            opponent = r.players[0];
+                            r.players.push({username, id: socket.id});
                         }
                         return r;
                     });
                     socket.join(room);
-                    io.to(room).emit('new player');
-                } else if(!findRoom) {
-                    this.rooms.push({ name: room, players: 1, field: new Array(9).fill('') });
+                    socket.emit('joined', opponent);
+                    socket.to(room).emit('new player', username);
+                } else if (!findRoom) {
+                    let players = [];
+                    players.push({username, id: socket.id});
+                    this.rooms.push({
+                        name: room,
+                        players,
+                        field: new Array(9).fill('')
+                    });
                     socket.join(room);
                 }
+                io.emit('update rooms', this.rooms);
+            });
 
-                io.emit('update rooms', this.rooms, this.rooms.find(r => r.name === room));
+            socket.on('start', room => {
+                let whoNext;
+                this.rooms = this.rooms.map(r => {
+                    if (r.name === room){
+                        r.whoNext = r.players[this.getRandomInt(2)];
+                        whoNext = r.whoNext;
+                    }
+                    return r;
+                });
+                io.to(room).emit('start', {xNext: this.xNextMove, whoNext});
+            });
+
+            socket.on('move', ({currentRoom, gameState}) => {
+                this.xNextMove = !this.xNextMove;
+                let whoNext;
+                this.rooms = this.rooms.map(r => {
+                    if (r.name === currentRoom){
+                        r.whoNext = r.players.find(p => p.id !== socket.id);
+                        whoNext = r.whoNext;
+                    }
+                    return r;
+                });
+                socket.broadcast.to(currentRoom).emit('move', {
+                    xNext: this.xNextMove,
+                    newGameState: gameState,
+                    whoNext
+                });
+                if (this.checkGameOver(gameState)) {
+                    const room = this.rooms.find(r => r.name === currentRoom);
+                    const winner = room.players.find(p => p.id === socket.id);
+                    io.to(currentRoom).emit('game over', winner);
+                }
+            });
+
+            socket.on('leave room', room => {
+               socket.leave(room);
+               const player = this.rooms.find(r => r.name === room).players.find(p => p.id === socket.id);
+               io.to(room).emit('cli leave', player);
             });
         });
+    }
+
+    getRandomInt(max){
+        return Math.floor(Math.random() * Math.floor(max))
+    }
+
+    checkGameOver(gameState) {
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        let gameOver = false;
+        for (let i = 0; i < lines.length; i++) {
+            const [a, b, c] = lines[i];
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                return gameOver = true;
+            }
+        }
+        return gameOver;
     }
 }
 

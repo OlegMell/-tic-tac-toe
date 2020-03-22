@@ -18,7 +18,7 @@ game.get('/game', (req, res) => {
     if(!currentRoom) {
         state = 'not set';
         field = [];
-    } else if(currentRoom.players < 2) {
+    } else if(currentRoom.players.length < 2) {
         state = 'wait';
         field = currentRoom.field;
     } else {
@@ -26,7 +26,6 @@ game.get('/game', (req, res) => {
         field = currentRoom.field;
     }
 
-    console.log(state);
     res.render('index', {
         layout: 'layouts/_default',
         username: req.session.username,

@@ -44,14 +44,22 @@ body{height: 100vh}
     font-size: 20px;
 }
 
+.field-wrap{
+    display: flex;
+    height: 60vh;
+}
+
 .field{
     margin: auto;
     display: flex;
     width: 300px;
+    max-width: 300px;
+    min-width: 300px;
     flex-wrap: wrap;
 }
 
 .field-item{
+    text-align: center;
     cursor: pointer;
     width: 100px;
     height: 100px;
@@ -76,4 +84,25 @@ body{height: 100vh}
     height: 100%;
     padding-right: 5px;
     border-right: 1px solid rgba(0, 0, 0, .4);
+}
+
+
+.info{
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 17px;
+    background-color: aquamarine;
+    height: 100px;
+}
+
+#currentRoom,
+#opponent,
+#leaveRoom{
+    display: none;
+}
+
+#currentRoom span,
+#opponent span{
+    font-weight: 600;
+    font-size: 18px;
 }
