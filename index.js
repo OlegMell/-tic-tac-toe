@@ -21,5 +21,4 @@ app.use(session({
 app.use('/', router);
 
 
-
-http.listen(port, host, () => console.log(`server listen on http://localhost:${port}`));
+http.listen(process.env.port || port, host, () => console.log(`server listen on http://localhost:${port}`));
