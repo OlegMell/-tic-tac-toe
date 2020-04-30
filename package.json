@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "hbs": "^4.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
