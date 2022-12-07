@@ -25,7 +25,7 @@
   "homepage": "https://github.com/OlegMell/-tic-tac-toe#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-session": "^1.17.0",
     "hbs": "^4.1.0",
     "jquery": "^3.4.1",
